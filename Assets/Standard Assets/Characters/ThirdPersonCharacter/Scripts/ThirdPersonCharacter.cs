@@ -46,8 +46,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 		void Update () {
 			if (UMAAnimator == null) {
-				if (GameObject.Find("Player")) {
-					UMAAnimator = GameObject.Find("Player").GetComponent<Animator>();
+				if (transform.Find("Player") && transform.Find("Player").GetComponent<Animator>()) {
+					UMAAnimator = transform.Find("Player").GetComponent<Animator>();
 					m_Animator = UMAAnimator;
 					m_Animator.applyRootMotion = false;
 				}

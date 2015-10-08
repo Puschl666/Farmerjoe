@@ -1,0 +1,55 @@
+KEY,English,German
+DnaMale,Male,Mann
+DnaFemale,Female,Frau
+DnaRandom,Random,Zufall
+DnaHead,Head,Kopf
+DnaHeadSize,Head Size,Kopfgröße
+DnaHeadWidth,Head Width,Kopfbreite
+DnaForeheadSize,Forehead Size,Stirngröße
+DnaForeheadPos,Forehead Position,Stirnposition
+DnaEarSize,Ear Size,Ohrgröße
+DnaEarPos,Ear Position,Ohrposition
+DnaEarRot,Ear Rotation,Ohrrotation
+DnaCheekSize,Cheek Size,Wangengröße
+DnaCheekPos,Cheek Position,Wangenposition
+DnaLowCheekPron,Low Cheek Pronounced,Untere Wangenausprägung
+DnaLowCheekPos,Low Cheek Position,Untere Wangenposition
+DnaMandibleSize,Mandible Size,Unterkiefergröße
+DnaJawSize,Jaw Size,Kiefergröße
+DnaJawPos,Jaw Position,Kieferposition
+DnaFace,Face,Gesicht
+DnaEyeSpace,Eye Space,Augenabstand
+DnaEyeSize,Eye Size,Augengröße
+DnaEyeRot,Eye Rotation,Augenrotation
+DnaChinSize,Chin Size,Kinngröße
+DnaChinPron,Chin Pronounced,Kinnausprägung
+DnaChinPos,Chin Position,Kinnposition
+DnaNoseSize,Nose Size,Nasengröße
+DnaNoseCurve,Nose Curve,Nasenkurve
+DnaNoseWidth,Nose Width,Nasenbreite
+DnaNoseInclin,Nose Inclination,Nasenneigung
+DnaNosePos,Nose Position,Nasenposition
+DnaNoseFlat,Nose Flatten,Nasenspitze
+DnaNosePron,Nose Pronounced,Nasenausprägung
+DnaMouthSize,Mouth Size,Mundgröße
+DnaLipSize,Lip Size,Lippenfülle
+DnaUpperBody,Upper Body,Oberkörper
+DnaHeight,Height,Größe
+DnaNeck,Neck,Hals
+DnaUpperMuscle,Upper Muscle,Obere Muskeln
+DnaUpperWeight,Upper Weight,Oberes Gewicht
+DnaBreastSize,Breast Size,Brustgröße
+DnaArmLength,Arm Length,Armlänge
+DnaArmWidth,Arm Width,Armdicke
+DnaForearmLength,Forearm Length,Unterarmlänge 
+DnaForearmWidth,Forearm Width,Unterarmdicke
+DnaHandSize,Hand Size,Handgröße
+DnaLowerBody,Lower Body,Unterkörper
+DnaLowerMuscle,Lower Muscle,Untere Muskeln
+DnaLowerWeight,Lower Weight,Unteres Gewicht
+DnaFeetSize,Feet Size,Fußgröße
+DnaBelly,Belly,Bauch
+DnaWaistSize,Waist Size,Taillenumfang 
+DnaGluteus,Gluteus,Gesäß 
+DnaLegSep,Leg Separation,Beinabstand
+DnaLegSize,Leg Size,Beinlänge

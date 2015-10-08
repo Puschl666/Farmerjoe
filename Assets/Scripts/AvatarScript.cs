@@ -148,32 +148,51 @@ public class AvatarScript : MonoBehaviour {
 		umaRecipe.SetRace (racelibrary.GetRace("HumanFemale"));
 		
 		var hairColor = new Color32 (250,240,190, 1);
-		umaData.umaRecipe.slotDataList [0] = slotLibrary.InstantiateSlot ("FemaleEyes");
-		umaData.umaRecipe.slotDataList [0].AddOverlay (overlayLibrary.InstantiateOverlay("EyeOverlay"));
-		umaData.umaRecipe.slotDataList [0].AddOverlay(overlayLibrary.InstantiateOverlay("EyeOverlayAdjust", Color.blue));
-		umaData.umaRecipe.slotDataList [1] = slotLibrary.InstantiateSlot ("FemaleInnerMouth");
-		umaData.umaRecipe.slotDataList [1].AddOverlay (overlayLibrary.InstantiateOverlay("InnerMouth"));
-		umaData.umaRecipe.slotDataList [2] = slotLibrary.InstantiateSlot ("FemaleFace");
-		umaData.umaRecipe.slotDataList [2].AddOverlay (overlayLibrary.InstantiateOverlay("FemaleHead01"));
-		umaData.umaRecipe.slotDataList [2].AddOverlay (overlayLibrary.InstantiateOverlay("FemaleLongHair01", hairColor));
-		umaData.umaRecipe.slotDataList [2].AddOverlay (overlayLibrary.InstantiateOverlay("FemaleEyebrow01", hairColor));
-		umaData.umaRecipe.slotDataList [2].AddOverlay (overlayLibrary.InstantiateOverlay("FemaleLipstick01", Color.red));
-		umaData.umaRecipe.slotDataList [3] = slotLibrary.InstantiateSlot ("FemaleTorso");
-		umaData.umaRecipe.slotDataList [3].AddOverlay (overlayLibrary.InstantiateOverlay("FemaleBody01"));
-		umaData.umaRecipe.slotDataList [3].AddOverlay (overlayLibrary.InstantiateOverlay("FemaleUnderwear01", Color.white));
-		umaData.umaRecipe.slotDataList [3].AddOverlay (overlayLibrary.InstantiateOverlay("FemaleShirt01", new Color32(0,255,255, 1)));
-		umaData.umaRecipe.slotDataList [4] = slotLibrary.InstantiateSlot ("FemaleHands");
-		umaData.umaRecipe.slotDataList [4].AddOverlay (overlayLibrary.InstantiateOverlay("FemaleBody01"));
-		umaData.umaRecipe.slotDataList [5] = slotLibrary.InstantiateSlot ("FemaleLegs");
-		umaData.umaRecipe.slotDataList [5].AddOverlay (overlayLibrary.InstantiateOverlay("FemaleBody01"));
-		umaData.umaRecipe.slotDataList [5].AddOverlay (overlayLibrary.InstantiateOverlay("FemaleUnderwear01", Color.black));
-		umaData.umaRecipe.slotDataList [5].AddOverlay (overlayLibrary.InstantiateOverlay("FemaleJeans01", new Color32(15, 74, 139, 1)));
-		umaData.umaRecipe.slotDataList [6] = slotLibrary.InstantiateSlot ("FemaleFeet");
-		umaData.umaRecipe.slotDataList [6].AddOverlay (overlayLibrary.InstantiateOverlay("FemaleBody01"));
-		umaData.umaRecipe.slotDataList [7] = slotLibrary.InstantiateSlot ("FemaleLongHair01_Module");
-		umaData.umaRecipe.slotDataList [7].AddOverlay (overlayLibrary.InstantiateOverlay("FemaleLongHair01_Module", hairColor));
+		linkOverlay(0, "FemaleEyes");
+		addOverlay(0, "EyeOverlay");
+		addOverlay(0, "EyeOverlayAdjust", Color.blue);
+		linkOverlay(1, "FemaleInnerMouth");
+		addOverlay(1, "InnerMouth");
+		linkOverlay(2, "FemaleFace");
+		addOverlay(2, "FemaleHead01");
+		addOverlay(2, "FemaleLongHair01", hairColor);
+		addOverlay(2, "FemaleEyebrow01", hairColor);
+		addOverlay(2, "FemaleLipstick01", Color.red);
+		linkOverlay(3, "FemaleTorso");
+		addOverlay(3, "FemaleBody01");
+		addOverlay(3, "FemaleUnderwear01", Color.white);
+		addOverlay(3, "FemaleShirt01", new Color32(0,255,255, 1));
+		linkOverlay(4, "FemaleHands");
+		umaData.umaRecipe.slotDataList [4].SetOverlayList (umaData.umaRecipe.slotDataList [3].GetOverlayList());
+		linkOverlay(5, "FemaleLegs");
+		umaData.umaRecipe.slotDataList [5].SetOverlayList (umaData.umaRecipe.slotDataList [3].GetOverlayList());
+		addOverlay(5, "FemaleJeans01", new Color32(15, 74, 139, 1));
+		linkOverlay(6, "FemaleFeet");
+		umaData.umaRecipe.slotDataList [6].SetOverlayList (umaData.umaRecipe.slotDataList [3].GetOverlayList());
+		linkOverlay(7, "FemaleLongHair01_Module");
+		addOverlay(7, "FemaleLongHair01_Module", hairColor);
 
 		umaDna.height = 0.4f;
+	}
+	
+	void linkOverlay(int slot, string name) {
+		umaData.umaRecipe.slotDataList [slot] = slotLibrary.InstantiateSlot (name);
+	}
+	
+	void addOverlay(int slot, string name) {
+		umaData.umaRecipe.slotDataList [slot].AddOverlay (overlayLibrary.InstantiateOverlay(name));
+	}
+	
+	void addOverlay(int slot, string name, Color color) {
+		umaData.umaRecipe.slotDataList [slot].AddOverlay (overlayLibrary.InstantiateOverlay(name, color));
+	}
+	
+	void removeOverlay(int slot, string name) {
+		umaData.umaRecipe.slotDataList [slot].RemoveOverlay(name);
+	}
+	
+	void colorOverlay(int slot, string name, Color color) {
+		umaData.umaRecipe.slotDataList [slot].SetOverlayColor (color, name);
 	}
 	
 	// Use this for initialization
