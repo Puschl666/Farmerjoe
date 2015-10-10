@@ -240,7 +240,7 @@ public class CustomistionScript : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		GenerateUMA ();
+        OnRandomGenderChanged();
 	}
 
     void initializeColorPanel(string name, Color color, ref Button button, ref RectTransform panel, ref Slider rSliter, ref Slider gSlider, ref Slider bSlider)
@@ -270,7 +270,12 @@ public class CustomistionScript : MonoBehaviour {
         bSlider.transform.Find("Value").gameObject.GetComponent<Text>().text = (color.b * 255).ToString("F0");
     }
 	
-	void GenerateUMA() {
+	void GenerateFemaleUMA() {
+        ClearActs();
+        if (GameObject.Find("CustomAvatar") != null)
+        {
+            Destroy(GameObject.Find("CustomAvatar"));
+        }
 		// Generate new GameObject and add UMA components to it
 		GameObject GO = new GameObject("CustomAvatar");
 		umaDynamicAvatar = GO.AddComponent<UMADynamicAvatar> ();
@@ -289,10 +294,8 @@ public class CustomistionScript : MonoBehaviour {
         // Set up our Morph references
         umaDna = new UMADnaHumanoid();
         umaData.umaRecipe.AddDna(umaDna);
-
-        //GenerateMale();
-        //GenerateFemale();
-        OnRandomGenderChanged();
+        
+        GenerateFemale();
         if (umaTutorialDna != null)
 			EyeSpacingSlider.interactable = true;
 		else
@@ -307,8 +310,50 @@ public class CustomistionScript : MonoBehaviour {
 		GO.transform.localPosition = Vector3.zero;
 		GO.transform.localRotation = Quaternion.identity;
 	}
-	
-	void GenerateNPC() {
+
+    void GenerateMaleUMA()
+    {
+        ClearActs();
+        if (GameObject.Find("CustomAvatar") != null)
+        {
+            Destroy(GameObject.Find("CustomAvatar"));
+        }
+        // Generate new GameObject and add UMA components to it
+        GameObject GO = new GameObject("CustomAvatar");
+        umaDynamicAvatar = GO.AddComponent<UMADynamicAvatar>();
+
+        // Initialise Avatar and grab a reference to it's data component
+        umaDynamicAvatar.Initialize();
+        umaData = umaDynamicAvatar.umaData;
+
+        // Attach our generator
+        umaDynamicAvatar.umaGenerator = generator;
+        umaData.umaGenerator = generator;
+
+        // Set up slot Array
+        umaData.umaRecipe.slotDataList = new SlotData[numberOfSlots];
+
+        // Set up our Morph references
+        umaDna = new UMADnaHumanoid();
+        umaData.umaRecipe.AddDna(umaDna);
+
+        GenerateMale();
+        if (umaTutorialDna != null)
+            EyeSpacingSlider.interactable = true;
+        else
+            EyeSpacingSlider.interactable = false;
+        SetSliders();
+        umaDynamicAvatar.animationController = animController;
+
+        // Generate our UMA
+        umaDynamicAvatar.UpdateNewRace();
+
+        GO.transform.parent = this.gameObject.transform;
+        GO.transform.localPosition = Vector3.zero;
+        GO.transform.localRotation = Quaternion.identity;
+    }
+
+    void GenerateNPC() {
         UnderwareColor = Color.black;
         ShirtColor = new Color32(255, 105, 180, 255);
         PantsColor = new Color32(15, 74, 139, 255);
@@ -355,7 +400,6 @@ public class CustomistionScript : MonoBehaviour {
         SetOverlayButtonsActive(true);
 
         initializeRandomColors();
-        initializePanels();
 
         // Grab a reference to our recipe
         var umaRecipe = umaDynamicAvatar.umaData.umaRecipe;
@@ -392,6 +436,7 @@ public class CustomistionScript : MonoBehaviour {
         SetSlot(8, "FemaleLongHair01_Module");
         if (actLongHairName != "") { removeOverlay(8, actLongHairName); }
         addOverlay(8, "FemaleLongHair01_Module", HairColor, (int)Slots.LongHair);
+        initializePanels();
     }
 
     void GenerateMale()
@@ -401,7 +446,6 @@ public class CustomistionScript : MonoBehaviour {
         SetOverlayButtonsActive(false);
 
         initializeRandomColors();
-        initializePanels();
 
         // Grab a reference to our recipe
         var umaRecipe = umaDynamicAvatar.umaData.umaRecipe;
@@ -438,7 +482,19 @@ public class CustomistionScript : MonoBehaviour {
         //SetSlot(8, "FemaleLongHair01_Module");
         if (actLongHairName != "") { removeOverlay(8, actLongHairName); }
         //addOverlay(8, "FemaleLongHair01_Module", HairColor, (int)Slots.LongHair);
+        initializePanels();
     }
+
+    void ClearActs()
+    {
+        actUnderwareName = "";
+        actShirtName = "";
+        actPantsName = "";
+        actHairName = "";
+        actLongHairName = "";
+        actEyesName = "";
+        actLipsName = "";
+}
 
     void initializeRandomColors()
     {
@@ -1081,22 +1137,22 @@ public class CustomistionScript : MonoBehaviour {
 
     public void OnFemaleChanged()
     {
-        GenerateFemale();
+        GenerateFemaleUMA();
     }
 
     public void OnMaleChanged()
     {
-        GenerateMale();
+        GenerateMaleUMA();
     }
 
     public void OnRandomGenderChanged()
     {
         if (Random.Range(0, 100) > 50)
         {
-            GenerateFemale();
+            GenerateFemaleUMA();
         } else
         {
-            GenerateMale();
+            GenerateMaleUMA();
         }
     }
 }
